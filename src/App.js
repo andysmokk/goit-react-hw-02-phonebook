@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
+// import shortid from 'shortid';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
@@ -15,12 +16,27 @@ class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = data => {
-    console.log(data);
+  deleteContact = contactId => {
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
+  formSubmitHandler = contact => {
+    const { contacts } = this.state;
+    this.setState({ contacts: [contact, ...contacts] });
+    console.log(contact);
   };
 
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
+  };
+
+  getFilteredContacts = () => {
+    const normalizedFilter = this.state.filter.toLocaleLowerCase();
+    return this.state.contacts.filter(contact =>
+      contact.name.toLocaleLowerCase().includes(normalizedFilter),
+    );
   };
 
   render() {
@@ -30,7 +46,10 @@ class App extends Component {
         <ContactForm onSubmit={this.formSubmitHandler} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeFilter} />
-        <ContactList contacts={this.state.contacts} />
+        <ContactList
+          contacts={this.getFilteredContacts()}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }

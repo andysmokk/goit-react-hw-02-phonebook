@@ -9,6 +9,14 @@ class ContactForm extends Component {
 
   nameInputId = shortid.generate();
   numberInputId = shortid.generate();
+  // newContactId = shortid.generate();
+
+  addContact = () => {
+    const newContactId = shortid.generate();
+    const { name, number } = this.state;
+    const newContact = { name, number, id: newContactId };
+    // this.props.onSubmit(newContact);
+  };
 
   onFormChange = e => {
     const { name, value } = e.currentTarget;
