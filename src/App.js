@@ -1,6 +1,5 @@
 import './App.css';
 import React, { Component } from 'react';
-// import shortid from 'shortid';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
@@ -25,7 +24,6 @@ class App extends Component {
   formSubmitHandler = contact => {
     const { contacts } = this.state;
     this.setState({ contacts: [contact, ...contacts] });
-    console.log(contact);
   };
 
   changeFilter = e => {
@@ -40,10 +38,11 @@ class App extends Component {
   };
 
   render() {
+    const { contacts } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} />
+        <ContactForm onSubmit={this.formSubmitHandler} contacts={contacts} />
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.changeFilter} />
         <ContactList
