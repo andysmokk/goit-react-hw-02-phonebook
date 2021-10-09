@@ -11,10 +11,11 @@ class ContactForm extends Component {
   numberInputId = shortid.generate();
 
   addContact = () => {
-    const newContactId = shortid.generate();
     const { name, number } = this.state;
+    const { onSubmit } = this.props;
+    const newContactId = shortid.generate();
     const newContact = { name, number, id: newContactId };
-    this.props.onSubmit(newContact);
+    onSubmit(newContact);
   };
 
   checkContactList = () => {
@@ -28,8 +29,8 @@ class ContactForm extends Component {
       : this.addContact();
   };
 
-  onFormChange = e => {
-    const { name, value } = e.currentTarget;
+  onFormChange = ({ target }) => {
+    const { name, value } = target;
 
     this.setState({
       [name]: value,
@@ -47,6 +48,7 @@ class ContactForm extends Component {
   };
 
   render() {
+    const { name, number } = this.state;
     return (
       <form onSubmit={this.onSubmitForm}>
         <label htmlFor={this.nameInputId}>
@@ -55,7 +57,7 @@ class ContactForm extends Component {
             type="text"
             name="name"
             placeholder="Григор Григорян"
-            value={this.state.name}
+            value={name}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
@@ -69,7 +71,7 @@ class ContactForm extends Component {
             type="tel"
             name="number"
             placeholder="111-22-33"
-            value={this.state.number}
+            value={number}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required

@@ -16,6 +16,7 @@ class App extends Component {
   };
 
   deleteContact = contactId => {
+    console.log(this);
     this.setState(prev => ({
       contacts: prev.contacts.filter(contact => contact.id !== contactId),
     }));
@@ -26,28 +27,37 @@ class App extends Component {
     this.setState({ contacts: [contact, ...contacts] });
   };
 
-  changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value });
+  changeFilter = ({ target }) => {
+    this.setState({ filter: target.value });
   };
 
   getFilteredContacts = () => {
-    const normalizedFilter = this.state.filter.toLocaleLowerCase();
-    return this.state.contacts.filter(contact =>
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLocaleLowerCase();
+    return contacts.filter(contact =>
       contact.name.toLocaleLowerCase().includes(normalizedFilter),
     );
   };
 
   render() {
-    const { contacts } = this.state;
+    const {
+      state,
+      formSubmitHandler,
+      changeFilter,
+      deleteContact,
+      getFilteredContacts,
+    } = this;
+    const { contacts, filter } = state;
+
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.formSubmitHandler} contacts={contacts} />
+        <ContactForm onSubmit={formSubmitHandler} contacts={contacts} />
         <h2>Contacts</h2>
-        <Filter value={this.state.filter} onChange={this.changeFilter} />
+        <Filter value={filter} onChange={changeFilter} />
         <ContactList
-          contacts={this.getFilteredContacts()}
-          onDeleteContact={this.deleteContact}
+          contacts={getFilteredContacts()}
+          onDeleteContact={deleteContact}
         />
       </div>
     );
