@@ -1,0 +1,32 @@
+.li {
+  width: 350px;
+  padding: 10px;
+  border: 1px solid rgba(54, 54, 54, 0.5);
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.li:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.ul {
+  padding-bottom: 10px;
+}
+
+.btn {
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: rgba(191, 143, 236, 0.452);
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: rgba(133, 76, 187, 0.788);
+  box-shadow: 2px 2px 5px 0px #000000;
+  color: white;
+}

@@ -1,0 +1,20 @@
+.title {
+  font-size: 34px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.box {
+  display: flex;
+}
+
+.divBox {
+  margin-left: 50px;
+}
+
+.boxList {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid rgba(43, 42, 42, 0.432);
+  box-shadow: 3px 3px 10px 3px #383838;
+}
