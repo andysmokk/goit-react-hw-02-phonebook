@@ -8,9 +8,6 @@ class ContactForm extends Component {
     number: '',
   };
 
-  nameInputId = shortid.generate();
-  numberInputId = shortid.generate();
-
   addContact = () => {
     const { name, number } = this.state;
     const { onSubmit } = this.props;
@@ -64,7 +61,7 @@ class ContactForm extends Component {
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
             onChange={this.onFormChange}
-            id={this.nameInputId}
+            id={shortid.generate()}
           />
         </label>
         <label className={s.label} htmlFor={this.numberInputId}>
@@ -79,7 +76,7 @@ class ContactForm extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
             onChange={this.onFormChange}
-            id={this.numberInputId}
+            id={shortid.generate()}
           />
         </label>
         <button className={s.btn} type="submit">
